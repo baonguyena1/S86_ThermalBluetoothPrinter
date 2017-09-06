@@ -284,7 +284,7 @@ static NSMutableData *lastData = nil;
  *******************************************************************/
 + (BOOL) setAsciiWordFormat:(int)type bold:(BOOL)isbold doubleHeight:(BOOL)isDoubleHeight doubleWidth:(BOOL)isDoubleWidth underline:(BOOL)isUnderLine;
 
-
++ (BOOL)setFont:(int)font;
 
 /*******************************************************************
  函数名：putInBuf，请不要直接调用，缓冲打印方式的时候自动调用

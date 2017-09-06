@@ -7,6 +7,8 @@
 
 #import "JOBTSecondViewController.h"
 #import "Print.h"
+#import "PrinterFormat.h"
+
 int cmd=0;
 extern CBPeripheral *activeDevice;
 id<CBPeripheralDelegate> deviceDelegate=nil;
@@ -190,127 +192,141 @@ id<CBPeripheralDelegate> deviceDelegate=nil;
     Byte bitmapLine8[]= {0xfc,0xfc,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0x0c,0xfc,0xfc};
     
 
-    NSData *data;
-    
-    //居中打印，对齐指令需要在行首发
+//    NSData *data;
+
+    NSString *title = [PrinterFormat printTitle:@"Receipt Printed Getzpass Branch"];
+    [Print setAsciiWordFormat:0 bold:YES doubleHeight:NO doubleWidth:NO underline:NO];
     [Print printAlignCenter];
-    BOOL ret=[Print printTxt:@"打印机打印测试\n\n\n"];
-    if (ret!=YES) NSLog(@"ret fail");
+    [Print printTxt:title];
 
-    [Print printAlignCenter];
-    [Print printTxt:@"调用1b 61 1居中打印\n居中打印\n居中打印\n\n\n\n"];
-
-    
-    //靠右打印
-    [Print printAlignRight];
-
-    [Print printTxt:@"调用1b 61 2靠右打印\n靠右打印\n靠右打印\n\n\n\n"];
-
-    //靠左打印
-    [Print printAlignLeft];
-    [Print printTxt:@"调用1b 61 0恢复靠左打印\n靠左打印\n靠左打印\n\n\n"];
-    
-    //加大行距ESC 3 n(1b 33 n)
-    [Print setLineHeight:255];
-    [Print printTxt:@"调用ESC 3 n加大行距\n加大行距\n加大行距\n"];
-    [Print restoreDefaultLineHeight];
-    [Print printTxt:@"调用ESC 2恢复默认行距\n恢复默认行距\n恢复默认行距\n\n\n\n"];
-    
-    
-    //设置标准ascii字符加粗、倍高、倍宽、下划线打印
-    [Print printTxt:@"调用ESC ! n 设置标准ascii字符加粗、倍高、倍宽、下划线打印\n"];
-    [Print setAsciiWordFormat:0 bold:YES doubleHeight:YES doubleWidth:YES underline:YES];
-    [Print printTxt:@"12345abcdefghijklmnopq\n"];
-    [Print printTxt:@"12345abcdefghijklmnopq\n"];
-    [Print printTxt:@"12345abcdefghijklmnopq\n"];
-    
-    //清除标准ascii字符加粗、倍高、倍宽、下划线打印
     [Print setAsciiWordFormat:0 bold:NO doubleHeight:NO doubleWidth:NO underline:NO];
-    [Print printTxt:@"调用ESC ! n 清除标准ascii字符加粗、倍高、倍宽、下划线打印\n"];
-    [Print printTxt:@"12345abcdefghijklmnopq\n"];
-    [Print printTxt:@"1234567890abcdefghijklmnopq\n"];
-    [Print printTxt:@"1234567890abcdefghijklmnopq\n\n\n"];
-    
-    
-    //设置汉子字符加粗、倍高、倍宽、下划线打印
-    [Print printTxt:@"调用FS ! n设置倍高、倍宽、下划线打印\n"];
-    [Print setChineseWordFormat:YES doubleWidth:YES underline:YES];
-    [Print printTxt:@"汉字打印测试\n"];
-    [Print printTxt:@"汉字打印测试\n"];
-    [Print printTxt:@"汉字打印测试\n"];
-    
-    //清除汉子字符加粗、倍高、倍宽、下划线打印
-    [Print setChineseWordFormat:NO doubleWidth:NO underline:NO];
-    [Print printTxt:@"调用FS ! n清除倍高、倍宽、下划线打印\n"];
-    [Print printTxt:@"打印机汉字打印测试\n"];
-    [Print printTxt:@"打印机汉字打印测试\n"];
-    [Print printTxt:@"打印机汉字打印测试\n\n\n"];
+    NSString *orderItem = [PrinterFormat printOrderNumber:@"1" title:@"Hamburger (and cheeseburgers and bacon cheeseburgers). Hamburger (and cheeseburgers and bacon cheeseburgers). Hamburger (and cheeseburgers and bacon cheeseburgers). Hamburger (and cheeseburgers and bacon cheeseburgers)" price:@"SGD 14.67"];
+    [Print printTxt:orderItem];
+
+    orderItem = [PrinterFormat printOrderNumber:@"1" title:@"Hamburger" price:@"SGD 14.67"];
+    [Print printTxt:orderItem];
+
+
+    //居中打印，对齐指令需要在行首发
+//    [Print printAlignCenter];
+//    BOOL ret=[Print printTxt:@"打印机打印测试\n\n\n"];
+//    if (ret!=YES) NSLog(@"ret fail");
+
+//    [Print printAlignCenter];
+//    [Print printTxt:@"调用1b 61 1居中打印\n居中打印\n居中打印\n\n\n\n"];
+//
+//
+//    //靠右打印
+//    [Print printAlignRight];
+//
+//    [Print printTxt:@"调用1b 61 2靠右打印\n靠右打印\n靠右打印\n\n\n\n"];
+//
+//    //靠左打印
+//    [Print printAlignLeft];
+//    [Print printTxt:@"调用1b 61 0恢复靠左打印\n靠左打印\n靠左打印\n\n\n"];
+//
+//    //加大行距ESC 3 n(1b 33 n)
+//    [Print setLineHeight:255];
+//    [Print printTxt:@"调用ESC 3 n加大行距\n加大行距\n加大行距\n"];
+//    [Print restoreDefaultLineHeight];
+//    [Print printTxt:@"调用ESC 2恢复默认行距\n恢复默认行距\n恢复默认行距\n\n\n\n"];
+//
+//
+//    //设置标准ascii字符加粗、倍高、倍宽、下划线打印
+//    [Print printTxt:@"调用ESC ! n 设置标准ascii字符加粗、倍高、倍宽、下划线打印\n"];
+//    [Print setAsciiWordFormat:0 bold:YES doubleHeight:YES doubleWidth:YES underline:YES];
+//    [Print printTxt:@"12345abcdefghijklmnopq12345abcdefghijklmnopq\n"];
+//    [Print printTxt:@"12345abcdefghijklmnopq\n"];
+//    [Print printTxt:@"12345abcdefghijklmnopq\n"];
+//
+//    //清除标准ascii字符加粗、倍高、倍宽、下划线打印
+//    [Print setFont:48];
+//    [Print setAsciiWordFormat:0 bold:NO doubleHeight:NO doubleWidth:NO underline:NO];
+//    [Print printTxt:@"调用ESC ! n 清除标准ascii字符加粗、倍高、倍宽、下划线打印\n"];
+//    [Print printTxt:@"1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\n"];
+//    [Print printTxt:@"1234567890abcdefghijklmnopq\n"];
+//    [Print printTxt:@"1234567890abcdefghijklmnopq\n\n\n"];
+//
+//
+//    //设置汉子字符加粗、倍高、倍宽、下划线打印
+//    [Print printTxt:@"调用FS ! n设置倍高、倍宽、下划线打印\n"];
+//    [Print setChineseWordFormat:YES doubleWidth:YES underline:YES];
+//    [Print printTxt:@"汉字打印测试\n"];
+//    [Print printTxt:@"汉字打印测试\n"];
+//    [Print printTxt:@"汉字打印测试\n"];
+//
+//    //清除汉子字符加粗、倍高、倍宽、下划线打印
+//    [Print setChineseWordFormat:NO doubleWidth:NO underline:NO];
+//    [Print printTxt:@"调用FS ! n清除倍高、倍宽、下划线打印\n"];
+//    [Print printTxt:@"打印机汉字打印测试\n"];
+//    [Print printTxt:@"打印机汉字打印测试\n"];
+//    [Print printTxt:@"打印机汉字打印测试\n\n\n"];
 
 
     
-    [Print printAlignCenter];
-    //打印一个位图
-    [Print printTxt:@"打印位图\n"];
-    [Print setLineHeight:0];       //设置行间距为0
-    //NSLog(@"bitmaplength=%d",sizeof(bitmap));
-    data=[[NSData alloc] initWithBytes:bitmapLine1 length:sizeof(bitmapLine1)];
-    [Print printBitMap:0 bitmap:data];
-    [Print printTxt:@"\n"];
-    data=[[NSData alloc] initWithBytes:bitmapLine2 length:sizeof(bitmapLine2)];
-    [Print printBitMap:0 bitmap:data];
-    [Print printTxt:@"\n"];
-    data=[[NSData alloc] initWithBytes:bitmapLine3 length:sizeof(bitmapLine3)];
-    [Print printBitMap:0 bitmap:data];
-    [Print printTxt:@"\n"];
-    data=[[NSData alloc] initWithBytes:bitmapLine4 length:sizeof(bitmapLine4)];
-    [Print printBitMap:0 bitmap:data];
-    [Print printTxt:@"\n"];
-    data=[[NSData alloc] initWithBytes:bitmapLine5 length:sizeof(bitmapLine5)];
-    [Print printBitMap:0 bitmap:data];
-    [Print printTxt:@"\n"];
-    data=[[NSData alloc] initWithBytes:bitmapLine6 length:sizeof(bitmapLine6)];
-    [Print printBitMap:0 bitmap:data];
-    [Print printTxt:@"\n"];
-    data=[[NSData alloc] initWithBytes:bitmapLine7 length:sizeof(bitmapLine7)];
-    [Print printBitMap:0 bitmap:data];
-    [Print printTxt:@"\n"];
-    data=[[NSData alloc] initWithBytes:bitmapLine8 length:sizeof(bitmapLine8)];
-    [Print printBitMap:0 bitmap:data];
-    [Print printTxt:@"\n"];
-    [Print restoreDefaultLineHeight];   //恢复行间距
-    [Print printTxt:@"\n\n\n"];
-    
+//    [Print printAlignCenter];
+//    //打印一个位图
+//    [Print printTxt:@"打印位图\n"];
+//    [Print setLineHeight:0];       //设置行间距为0
+//    //NSLog(@"bitmaplength=%d",sizeof(bitmap));
+//    data=[[NSData alloc] initWithBytes:bitmapLine1 length:sizeof(bitmapLine1)];
+//    [Print printBitMap:0 bitmap:data];
+//    [Print printTxt:@"\n"];
+//    data=[[NSData alloc] initWithBytes:bitmapLine2 length:sizeof(bitmapLine2)];
+//    [Print printBitMap:0 bitmap:data];
+//    [Print printTxt:@"\n"];
+//    data=[[NSData alloc] initWithBytes:bitmapLine3 length:sizeof(bitmapLine3)];
+//    [Print printBitMap:0 bitmap:data];
+//    [Print printTxt:@"\n"];
+//    data=[[NSData alloc] initWithBytes:bitmapLine4 length:sizeof(bitmapLine4)];
+//    [Print printBitMap:0 bitmap:data];
+//    [Print printTxt:@"\n"];
+//    data=[[NSData alloc] initWithBytes:bitmapLine5 length:sizeof(bitmapLine5)];
+//    [Print printBitMap:0 bitmap:data];
+//    [Print printTxt:@"\n"];
+//    data=[[NSData alloc] initWithBytes:bitmapLine6 length:sizeof(bitmapLine6)];
+//    [Print printBitMap:0 bitmap:data];
+//    [Print printTxt:@"\n"];
+//    data=[[NSData alloc] initWithBytes:bitmapLine7 length:sizeof(bitmapLine7)];
+//    [Print printBitMap:0 bitmap:data];
+//    [Print printTxt:@"\n"];
+//    data=[[NSData alloc] initWithBytes:bitmapLine8 length:sizeof(bitmapLine8)];
+//    [Print printBitMap:0 bitmap:data];
+//    [Print printTxt:@"\n"];
+//    [Print restoreDefaultLineHeight];   //恢复行间距
+//    [Print printTxt:@"\n\n\n"];
+
     //打印一维条码
-    [Print printTxt:@"打印一维条码\n"];
-    
-    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    data=[@"1234567890" dataUsingEncoding:enc];
-    
-    [Print print1DBarCode:POS_BT_CODE39 width:2 height:150 txtpositon:POS_BT_HT_DOWN content:data];
-    
-    data=[@"12345" dataUsingEncoding:enc];
-    
-    [Print print1DBarCode:POS_BT_CODE39 width:2 height:150 txtpositon:POS_BT_HT_DOWN content:data];
-    
-    //打印二位条码
-    [Print printTxt:@"打印二维条码\n"];
-    data=[@"www.sina.com-中国" dataUsingEncoding:enc];
-    [Print print2DBarCode:POS_BT_PDF417 para1:2 para2:6 para3:1 content:data];
-    
-    data=[@"www.sina.com-北京市" dataUsingEncoding:enc];
-    [Print print2DBarCode:POS_BT_DATAMATRIX para1:40 para2:40 para3:4 content:data];
-    
-    data=[@"www.sina.com-石家庄" dataUsingEncoding:enc];
-    [Print print2DBarCode:POS_BT_QRCODE para1:2 para2:77 para3:4 content:data];
-    
-    //
-    [Print printTxt:@"\n\n\n\n切纸\n"];
-    [Print cutPaper:0 feed_distance:0];
-    
-    [Print printTxt:@"打印测试完毕！\n\n\n\n\n\n"];
-    [Print printAlignLeft];
-    [Print printTxt:@"\n"];
-    
+//    [Print printTxt:@"打印一维条码\n"];
+
+//    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+//    data=[@"1234567890" dataUsingEncoding:enc];
+//
+//    [Print print1DBarCode:POS_BT_CODE39 width:2 height:150 txtpositon:POS_BT_HT_DOWN content:data];
+//
+//    data=[@"12345" dataUsingEncoding:enc];
+//
+//    [Print print1DBarCode:POS_BT_CODE39 width:2 height:150 txtpositon:POS_BT_HT_DOWN content:data];
+//
+//    //打印二位条码
+//    [Print printTxt:@"打印二维条码\n"];
+//    data=[@"www.sina.com-中国" dataUsingEncoding:enc];
+//    [Print print2DBarCode:POS_BT_PDF417 para1:2 para2:6 para3:1 content:data];
+//
+//    data=[@"www.sina.com-北京市" dataUsingEncoding:enc];
+//    [Print print2DBarCode:POS_BT_DATAMATRIX para1:40 para2:40 para3:4 content:data];
+//
+//    data=[@"www.sina.com-石家庄" dataUsingEncoding:enc];
+//    [Print print2DBarCode:POS_BT_QRCODE para1:2 para2:77 para3:4 content:data];
+//
+//    //
+//    [Print printTxt:@"\n\n\n\n切纸\n"];
+//    [Print cutPaper:0 feed_distance:0];
+//
+//    [Print printTxt:@"打印测试完毕！\n\n\n\n\n\n"];
+//    [Print printAlignLeft];
+//    [Print printTxt:@"\n"];
+
 }
 - (IBAction)buttonQuery:(id)sender
 {

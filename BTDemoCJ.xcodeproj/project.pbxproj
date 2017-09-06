@@ -36,6 +36,7 @@
 		77F26E5A1AAED802009ABDB2 /* circle.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 77F26E591AAED802009ABDB2 /* circle.PNG */; };
 		77F26E5C1AAEEB02009ABDB2 /* XX.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 77F26E5B1AAEEB02009ABDB2 /* XX.PNG */; };
 		77F26E601AAFD909009ABDB2 /* XX.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 77F26E5F1AAFD909009ABDB2 /* XX.JPG */; };
+		DCECDBE71F5FABDE00C805E4 /* PrinterFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = DCECDBE61F5FABDE00C805E4 /* PrinterFormat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,8 @@
 		77F26E591AAED802009ABDB2 /* circle.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = circle.PNG; path = BTDemo/circle.PNG; sourceTree = "<group>"; };
 		77F26E5B1AAEEB02009ABDB2 /* XX.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = XX.PNG; path = BTDemo/XX.PNG; sourceTree = "<group>"; };
 		77F26E5F1AAFD909009ABDB2 /* XX.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = XX.JPG; path = BTDemo/XX.JPG; sourceTree = "<group>"; };
+		DCECDBE51F5FABDE00C805E4 /* PrinterFormat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrinterFormat.h; sourceTree = "<group>"; };
+		DCECDBE61F5FABDE00C805E4 /* PrinterFormat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrinterFormat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				2A01EB2D156A4DCC00EAA090 /* Icon-72@2x.png */,
 				2A01EB2E156A4DCC00EAA090 /* Icon.png */,
 				2A01EB2F156A4DCC00EAA090 /* Icon@2x.png */,
+				DCECDBE51F5FABDE00C805E4 /* PrinterFormat.h */,
+				DCECDBE61F5FABDE00C805E4 /* PrinterFormat.m */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				2A927557153EA11E00B4829D /* JOBTFirstViewController.m in Sources */,
 				2A92755E153EA11E00B4829D /* JOBTSecondViewController.m in Sources */,
 				77A8BB861A03169C00DB6A7D /* Print.m in Sources */,
+				DCECDBE71F5FABDE00C805E4 /* PrinterFormat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

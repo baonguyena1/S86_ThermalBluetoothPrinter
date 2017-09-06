@@ -300,6 +300,18 @@ extern int cmd;
 
 }
 
++ (BOOL)setFont:(int)font {
+    Byte byte[3];
+    NSData *cmd;
+    //ESC     M         n 1B         4D         n
+    byte[0] = 0x1b;
+    byte[1] = 0x4d;
+    byte[2] = (Byte)font;
+    cmd = [[NSData alloc] initWithBytes:byte length:3];
+    if (![self printBin:cmd]) return NO;
+    return YES;
+}
+
 + (void) buffedWriteCtrl:(BOOL)isBuffed
 {
     isBuffedWrite = isBuffed;
