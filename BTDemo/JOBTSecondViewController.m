@@ -194,17 +194,24 @@ id<CBPeripheralDelegate> deviceDelegate=nil;
 
 //    NSData *data;
 
-    NSString *title = [PrinterFormat printTitle:@"Receipt Printed Getzpass Branch"];
-    [Print setAsciiWordFormat:0 bold:YES doubleHeight:NO doubleWidth:NO underline:NO];
+    NSString *title = [PrinterFormat printTitle:@"Receipt Printed Getzpass Branch\n"];
+    [Print setAsciiWordFormat:0 bold:YES doubleHeight:YES doubleWidth:NO underline:NO];
     [Print printAlignCenter];
     [Print printTxt:title];
 
     [Print setAsciiWordFormat:0 bold:NO doubleHeight:NO doubleWidth:NO underline:NO];
-    NSString *orderItem = [PrinterFormat printOrderNumber:@"1" title:@"Hamburger (and cheeseburgers and bacon cheeseburgers). Hamburger (and cheeseburgers and bacon cheeseburgers). Hamburger (and cheeseburgers and bacon cheeseburgers). Hamburger (and cheeseburgers and bacon cheeseburgers)" price:@"SGD 14.67"];
+    NSString *orderItem = [PrinterFormat printOrderNumber:@"1" title:@"Hamburger (and cheeseburgers and bacon cheeseburgers). Hamburger (and cheeseburgers and bacon cheeseburgers)" price:@"SGD 14.67"];
     [Print printTxt:orderItem];
 
-    orderItem = [PrinterFormat printOrderNumber:@"1" title:@"Hamburger" price:@"SGD 14.67"];
-    [Print printTxt:orderItem];
+//    orderItem = [PrinterFormat printOrderNumber:@"1" title:@"Hamburger" price:@"SGD 14.67"];
+//    [Print printTxt:orderItem];
+    NSString *subOrderItem = [PrinterFormat printSubOrderNumer:@"3x" title:@"medium-well (+ SGD 4.00).medium-well (+ SGD 4.00).medium-well (+ SGD 4.00).medium-well (+ SGD 4.00)"];
+    [Print printTxt:subOrderItem];
+    subOrderItem = [PrinterFormat printSubOrderNumer:@"3x" title:@"extra mayo (+SGD 0.20"];
+    [Print printTxt:subOrderItem];
+
+    NSString *leftRightItem = [PrinterFormat leftRightItem:@"Getzpay - Visa/Master (online).Getzpay - Visa/Master (online)" rightTitle:@"-SGD 10.67"];
+    [Print printTxt:leftRightItem];
 
 
     //居中打印，对齐指令需要在行首发

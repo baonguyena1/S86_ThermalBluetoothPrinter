@@ -14,7 +14,8 @@
 @interface PrinterFormat : NSObject
 
 + (NSString *)printTitle:(NSString *)title;
-
 + (NSString *)printOrderNumber:(NSString *)orderNumber title:(NSString *)mTitle price:(NSString *)mPrice;
++ (NSString *)printSubOrderNumer:(NSString *)subOrderNumber title:(NSString *)mTitle;
++ (NSString *)leftRightItem:(NSString *)leftTitle rightTitle:(NSString *)mRightTitle;
 
 @end
